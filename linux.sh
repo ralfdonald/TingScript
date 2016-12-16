@@ -1,11 +1,21 @@
 #!/bin/bash
 
-if [ -z $1 ]; then
+TING="${1}"
+if [ -z "${1}" ] ; then
+	TING="$(grep '/TING\s' /proc/mounts |cut -d ' ' -f 2)"
+	if ! [ -d "${TING}/\$ting" ] ; then
+		TING=
+	fi
+fi
+
+
+if [ -z "${TING}" ]; then
+	echo "TING konnte nicht automatisch erkannt werden. Bitte gib den Mount-Point des TING-Stifts als Parameter mit."
         echo "Usage: $0 [Ort des \$ting-Ordners]"
         exit 1
 fi
 
-tingPath=$1
+tingPath="$TING"
 
 pngEnd="_en.png"
 txtEnd="_en.txt"
@@ -28,7 +38,7 @@ cleanFile () {
 emptyFile () {
     echo "Leere File $1"
     echo ""
-#    $(echo "" > $1)
+    truncate --size=0 $1
 }
 
 checkFiles () {
@@ -71,9 +81,18 @@ getFiles () {
     echo ""
 }
 
-echo "Ort des \$ting-Ordner: $1"
+echo "Ort des \$ting-Ordner: $tingPath"
 
 filename="$tingPath/\$ting/TBD.TXT"
+if ! [ -f "$filename" ] ; then
+	filename="$tingPath/\$ting/tbd.txt"
+fi
+
+if [ "$(wc -l "$filename"|cut -d ' ' -f 1)" == 0 ] ; then
+	echo 'Kein fehlendes Buch gefunden.'
+	exit 0
+fi
+	
 cleanFile "$filename"
 
 while read -r line
