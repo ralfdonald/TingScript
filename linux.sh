@@ -97,7 +97,7 @@ cleanFile "$filename"
 
 while read -r line
 do
-    export bookId=$(echo -n "$line" | tr -d $'\r' | grep "[0-9]")
+    export bookId=$(echo -n "$line" | tr -d $'\r' | grep "[0-9]" | sed 's/^0*//')
     getFiles "$bookId" "$tingPath/\$ting"
 
 done < "$filename"
