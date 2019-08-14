@@ -44,11 +44,12 @@ emptyFile () {
 checkFiles () {
     echo "Prüfe Datei $3";
     thumbMD5=$(cat $3 | grep "ThumbMD5:" | grep -ow "[0-9a-z]*");
+    s=$(echo "$1" | sed 's/^0*//')
     if [ -z $thumbMD5 ]; then
         echo "Kein Vorschaubild notwendig"
     else
         echo "Downloade Vorschaubild $1$pngEnd"
-        wget http://system.ting.eu/book-files/get/id/$1/area/en/type/thumb -O $2/$1$pngEnd
+        wget http://system.ting.eu/book-files/get/id/$s/area/en/type/thumb -O $2/$1$pngEnd
     fi
 
     fileMD5=$(cat $3 | grep "FileMD5:" | grep -ow "[0-9a-z]*")
@@ -56,21 +57,23 @@ checkFiles () {
         echo "Kein Buchfile notwendig"
     else
         echo "Downloade Buchfile $1$oufEnd"
-        wget http://system.ting.eu/book-files/get/id/$1/area/en/type/archive -O $2/$1$oufEnd
+        wget http://system.ting.eu/book-files/get/id/$s/area/en/type/archive -O $2/$1$oufEnd
     fi
     scriptMD5=$(cat $3 | grep "ScriptMD5:" | grep -ow "[0-9a-z]*")
     if [ -z $scriptMD5 ]; then
         echo "Kein Scriptfile notwendig"
     else
         echo "Downloade Scriptfile $1$scrEnd"
-        wget http://system.ting.eu/book-files/get/id/$1/area/en/type/script -O $2/$1$scrEnd
+        wget http://system.ting.eu/book-files/get/id/$s/area/en/type/script -O $2/$1$scrEnd
     fi
 
     echo ""
 }
 
 getInfo () {
-    $(wget http://system.ting.eu/book-files/get-description/id/"$1"/area/en -O "$2"/"$1""$3")
+    s=$(echo "$1" | sed 's/^0*//')
+    echo "short: $s"
+    wget http://system.ting.eu/book-files/get-description/id/"$s"/area/en -O "$2"/"$1""$3"
 }
 
 getFiles () {
