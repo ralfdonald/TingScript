@@ -20,3 +20,4 @@ For example ./linux.sh /media/Ting if the /media/Ting includes the folder $ting 
 ## Contributors
 - Ralf Meyer https://github.com/ralfdonald
 - Bernd Wurst https://github.com/bwurst
+- Stefan Dangl https://github.com/stangls
