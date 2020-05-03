@@ -29,8 +29,9 @@ cleanFile () {
     do
         $(echo -n "$line" | tr -d $'\r' | grep "[0-9]" >> TBD_TEMP.TXT)
     done < "$filename"
-    rm $1
-    mv TBD_TEMP.TXT $1
+    rm $1    
+    sort -u TBD_TEMP.TXT > $1
+    rm TBD_TEMP.TXT
     echo ""
 }
 
