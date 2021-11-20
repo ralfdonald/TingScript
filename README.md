@@ -1,25 +1,45 @@
 # TingScript
 Bash script for filling the TING pen with audio books under Linux, which have to be downloaded
 
-## Requirements ##
+## Requirements
 - TING pen with USB cable
 - bash as shell (maybe other can run well, but can't be guaranteed)
 
-## Before using the script
-- put in the USB cable into the TING pen
 
-## Usage of the script
-```bash
-./linux.sh
-```
-For auto detection of Ting folder over mount point and TBD.TXT/tbd.txt filename.
+## Installation
 
-## Usage if auto detection fails
-Check in which folder the $ting folder shows up, where the TBD.TXT file is
-```shell
-./linux.sh <pathOfFolderWhere$tingIs>
-```
-For example ./linux.sh /media/Ting if the /media/Ting includes the folder $ting in which the TBD.TXT file is
+1. Open a terminal
+
+2. Go to the directory where you want to install the script
+
+3. Clone the repository:
+
+   ```bash
+   git clone https://github.com/ralfdonald/TingScript.git
+   ```
+
+## Usage
+1. The script downloads "missing" books, i.e. books that the TING pen has "seen" but which are currently not stored on the pen. Therefore, turn on the pen and
+use it to touch the activation icons of all the books that you want to download.
+
+2. Connect the TING pen to your computer using the USB cable
+
+3. Execute the script:
+
+   ```bash
+   ./linux.sh
+   ```
+
+   The script will try to auto-detect the location of the TING pen's mount
+   point. If that fails you can pass the mount point to the script as a
+   parameter:
+
+   ```bash
+   ./linux.sh path/to/the/mount/point
+   ```
+
+   The path that you pass should be the folder that contains the ``$ting``
+   folder.
 
 ## Contributors
 - Ralf Meyer https://github.com/ralfdonald
