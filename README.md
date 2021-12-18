@@ -46,4 +46,4 @@ use it to touch the activation icons of all the books that you want to download.
 - Bernd Wurst https://github.com/bwurst
 - Stefan Dangl https://github.com/stangls
 - frog23 https://github.com/frog23
-- torfsen https://github.com/torfsen
+- Florian Brucker https://github.com/torfsen
